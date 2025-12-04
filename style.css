@@ -1,0 +1,398 @@
+/*
+=====================================
+ESTILOS GENERALES Y LAYOUT
+=====================================
+*/
+
+/* Fondo y tipografía general */
+body {
+    margin: 0;
+    padding: 0;
+    /* Fondo más oscuro y moderno */
+    background-color: #2D2D5A; 
+    font-family: 'Luxurious Roman', serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px; /* Ancho un poco mayor */
+    margin: 40px auto;
+    padding: 0 40px; 
+}
+
+
+/* Cards principales */
+.card {
+    /* Color de fondo más claro y atractivo */
+    background-color: #F8F7FF; 
+    padding: 30px;
+    border-radius: 20px; /* Esquinas más redondas */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra más suave */
+    margin-bottom: 25px; /* Espacio uniforme */
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/*
+=====================================
+LAYOUT DE COLUMNAS PRINCIPAL
+=====================================
+*/
+.main-content-grid {
+    display: grid;
+    /* Columna izquierda (contenido) es más ancha (2fr) y 
+        columna derecha (logros/contacto) es más compacta (1.5fr). */
+    grid-template-columns: 2fr 1.5fr; 
+    gap: 25px;
+}
+
+.col-left,
+.col-right {
+    display: flex;
+    flex-direction: column;
+}
+
+/* * * * * * NUEVA SECCIÓN DE PROYECTOS A TODO ANCHO * * * * *
+Para que Proyectos abarque todo el ancho, lo sacamos del grid de columnas
+y lo colocamos *después* del .main-content-grid en el HTML, O lo añadimos
+al final del .col-left y ajustamos el grid si se quiere mantener en la misma
+estructura (como se hará a continuación para la simpleza del HTML).
+
+Para lograr el efecto de ancho completo, vamos a usar el .main-content-grid
+pero solo para las secciones que deben estar en columnas (habilidades, educación, 
+logros, contacto). La sección de proyectos se moverá en el HTML para ir después.
+*/
+
+/*
+=====================================
+TIPOGRAFÍA
+=====================================
+*/
+
+/* Títulos de secciones */
+.section-title {
+    font-family: 'Alkatra', cursive;
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #4A4A99; /* Morado más oscuro */
+    border-bottom: 2px solid #D9D6FF; /* Línea separadora */
+    padding-bottom: 5px;
+}
+
+/* Subtítulos de habilidades */
+.skill-subtitle {
+    font-family: 'Alkatra', cursive;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #6A6ABD; 
+}
+
+/* Nombre principal */
+.name {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 44px;
+    margin: 0;
+    color: #2D2D5A;
+}
+
+/* Subtítulo */
+.subtitle {
+    margin-top: 5px;
+    font-size: 18px;
+    color: #777;
+}
+
+/* Listas */
+.skill-list,
+.simple-list {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.skill-list li,
+.simple-list li {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+/*
+=====================================
+SECCIÓN PERFIL
+=====================================
+*/
+
+.profile-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 35px;
+    margin-bottom: 40px;
+}
+
+.profile-img-side {
+    width: 200px; 
+    height: 200px;
+    border-radius: 10px; 
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-info {
+    text-align: left; 
+    flex: 1;
+}
+
+/*
+=====================================
+SECCIÓN HABILIDADES (Grid)
+=====================================
+*/
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px;
+}
+
+
+/*
+=====================================
+SECCIÓN EDUCACIÓN (Grid Interno)
+=====================================
+*/
+
+/* Grid de 2 columnas para las mini-cards */
+.grid-2-mini {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Card interna para la educación */
+.card-mini {
+    background-color: #EEEFFC; 
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 5px solid #6A6ABD; 
+}
+
+.card-mini p {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.card-mini .date {
+    font-size: 14px;
+    color: #888;
+}
+
+/*
+=====================================
+SECCIÓN LOGROS (Grid de Premios con Scroll)
+=====================================
+*/
+
+/* La tarjeta principal de logros */
+.logros-full-card {
+    /* Mantenemos el flex-grow pero ajustamos la altura del scroll */
+    flex-grow: 1; 
+}
+
+.logros-text {
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #555;
+}
+
+/* Contenedor de premios que tendrá el scroll y el grid */
+.premios-grid-scroll {
+    /* * * * CORRECCIÓN CLAVE * * * */
+    /* Altura más pequeña para el scroll */
+    height: 380px; 
+    overflow-y: auto;
+    padding-right: 15px; 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas de premios */
+    gap: 15px; 
+    overflow-x: hidden; 
+}
+
+/* * * * CORRECCIÓN CLAVE PARA PREMIO CARD * * * Se eliminó la regla 'aspect-ratio: 1/1' que causaba el desborde y la superposición
+al tener un tamaño fijo en una cuadrícula con scroll. 
+Al darle una altura mínima se asegura que siempre se muestre un espacio de dos en dos.
+*/
+.premio-card {
+    /* Altura mínima para asegurar que los elementos se vean de dos en dos */
+    min-height: 150px; 
+    width: 100%;
+    border-radius: 14px;
+    padding: 10px;
+
+    background: linear-gradient(135deg, #E6E6FF, #F2F2FF);
+    border: 1px solid #D9D6FF;
+
+    /* Configuración clave para centrar el contenido (imagen y texto) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+
+    overflow: hidden; 
+    box-sizing: border-box;
+
+    transition: box-shadow 0.2s ease; 
+    text-align: center;
+    font-size: 14px;
+}
+
+/* ELIMINAMOS EL EFECTO DE HOVER que hacía que el cuadrito se moviera */
+.premio-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+}
+
+/* CORRECCIÓN PARA LA IMAGEN: Asegura que se ajuste al espacio */
+.premio-card img {
+    width: 50%; 
+    max-height: 50%;
+    height: auto;
+    object-fit: contain; 
+    margin-bottom: 8px; 
+    margin-top: 0; 
+}
+
+
+/* ESTILOS DEL SCROLLBAR (Chrome/Edge/Safari) - Estos aseguran que siempre se vea la barra si es necesario */
+.premios-grid-scroll::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.premios-grid-scroll::-webkit-scrollbar-thumb {
+    background: #6A6ABD; 
+    border-radius: 10px;
+}
+
+.premios-grid-scroll::-webkit-scrollbar-track {
+    background: #F8F7FF; 
+}
+
+
+/*
+=====================================
+SECCIÓN CONTACTO
+=====================================
+*/
+
+.contact-links p {
+    margin: 5px 0;
+    font-size: 17px;
+    color: #444;
+}
+
+/*
+=====================================
+RESPONSIVE DESIGN (Básico)
+=====================================
+*/
+
+@media (max-width: 900px) {
+    .main-content-grid {
+        grid-template-columns: 1fr; /* Pasa a una sola columna en pantallas pequeñas */
+    }
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .profile-info {
+        text-align: center;
+    }
+    .premios-grid-scroll {
+        /* En móvil, se mantiene la altura o se ajusta un poco */
+        height: 400px;
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas de premios en tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .grid-2-mini {
+        grid-template-columns: 1fr;
+    }
+    .container {
+        padding: 0 20px;
+        margin: 20px auto;
+    }
+    .premios-grid-scroll {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas de premios en móvil */
+    }
+}
+
+/*
+=====================================
+SECCIÓN PROYECTOS ADICIONALES
+=====================================
+*/
+
+/* Espacio entre proyectos */
+.proyecto {
+    margin-bottom: 25px;
+}
+
+/* Estilo para los detalles (tecnologías/repositorio) */
+.project-details {
+    font-size: 14px;
+    color: #6A6ABD; /* Color del subtítulo */
+    margin-top: 15px;
+    padding-left: 10px;
+    border-left: 3px solid #D9D6FF;
+}
+
+.project-details a {
+    color: #4A4A99;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project-details a:hover {
+    text-decoration: underline;
+}
+
+/* Separador horizontal entre proyectos */
+.project-separator {
+    border: none;
+    height: 1px;
+    background-color: #D9D6FF; /* Un color suave para la línea */
+    margin: 30px 0;
+}
+
+/*
+=====================================
+AJUSTE DE ESTILO EN CONTACTO
+=====================================
+*/
+
+.contact-links a {
+    /* Color oscuro para que se parezca al texto normal */
+    color: #444; 
+    /* Quita el subrayado predeterminado del enlace */
+    text-decoration: none; 
+    font-weight: bold; /* Para destacarlo un poco más */
+}
+
+.contact-links a:hover {
+    /* Vuelve a poner el subrayado al pasar el ratón */
+    text-decoration: underline; 
+}
+
+
+
+
+
